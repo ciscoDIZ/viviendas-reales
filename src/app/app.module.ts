@@ -10,13 +10,15 @@ import {PublicModule} from "./module/public/public.module";
 import {DashboardComponent} from "./component/dashboard/dashboard.component";
 import {HousingDetailsComponent} from "./component/housing-details/housing-details.component";
 import {PrivateModule} from "./module/private/private.module";
+import { FooterComponent } from './component/footer/footer.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HeaderComponent,
         DashboardComponent,
-        HousingDetailsComponent
+        HousingDetailsComponent,
+        FooterComponent
     ],
     imports: [
         BrowserModule,

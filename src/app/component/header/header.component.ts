@@ -11,7 +11,10 @@ import {Router} from "@angular/router";
 export class HeaderComponent implements OnInit {
   @Input()
   session: Session;
-  constructor(private authService: AuthService, private router: Router) { }
+  navbarSupportedContent: string;
+  constructor(private authService: AuthService, private router: Router) {
+    this.navbarSupportedContent = 'navbarSupportedContent'
+  }
 
   ngOnInit(): void {
     this.session = this.authService.getSession()

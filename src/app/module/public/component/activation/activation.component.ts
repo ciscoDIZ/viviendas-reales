@@ -32,7 +32,9 @@ export class ActivationComponent implements OnInit {
     this.authService.activate(this.activationUri).subscribe($data => this.activatedUser = $data);
     this.loggedUser = this.jwtHelperService.decodeToken<Session>(this.activatedUser.token);
     sessionStorage.setItem('session', JSON.stringify(this.loggedUser));
-    this.router.navigate(['private/dashboard'])
+    this.router
+      .navigate(['private/dashboard'])
+      .then(() => window.location.reload());
   }
 
   ngOnInit(): void {

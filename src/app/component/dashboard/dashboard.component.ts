@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Location} from "@angular/common";
 
 import {Housing} from "../../interface/housing";
 import {Session} from "../../interface/session";
-import {Router} from "@angular/router";
 import {HousingService} from "../../service/housing.service";
 
 @Component({
@@ -14,20 +12,24 @@ import {HousingService} from "../../service/housing.service";
 export class DashboardComponent implements OnInit {
   housings: Housing[];
   session: Session;
-  constructor(private housingService: HousingService, private router: Router, private location: Location) {
+  privateRoute: string;
+  publicRoute: string;
+  private readonly componentRoute: string = 'housing/details/';
+  constructor(private housingService: HousingService) {
+    this.privateRoute = `/private/${this.componentRoute}`;
+    this.publicRoute = `/public/${this.componentRoute}`;
   }
   ngOnInit(): void {
+    this.getContent();
+  }
+
+  private getContent() {
     this.session = JSON.parse(sessionStorage.getItem('session'));
-    const path = this.location.path(false);
-    const pathBase = path.substring(1).split('/')[0];
-    console.log(this.router.routerState)
-    if (this.session && pathBase == 'public') {
-      this.router.navigate(['private'])
-    }else if (pathBase == 'public') {
+    if (!this.session) {
       this.housingService.getAll().subscribe($data => this.housings = $data.list);
-    }else {
-      const { id } = this.session;
-      this.housingService.getByOwner(id).subscribe($data => this.housings = $data.list)
+      return;
     }
+    const { id } = this.session;
+    this.housingService.getByOwner(id).subscribe($data => this.housings = $data.list);
   }
 }

@@ -3,13 +3,13 @@
     <div class="col-4" *ngFor="let housing of housings">
       <h2>{{housing.address.name}}, {{housing.address.number}}</h2>
       <img src="{{housing.mainImage.apiUri}}" alt="">
-
-      <button *ngIf="!session; else privateRoute" class="btn btn-primary" routerLink="/public/housing/details/{{housing.id}}">Details</button>
-      <ng-template #privateRoute>
-        <button class="btn btn-primary" routerLink="/private/housing/details/{{housing.id}}">Details</button>
-      </ng-template>
+      <button
+        class="btn btn-primary"
+        routerLink="{{(session) ? privateRoute : publicRoute}}/{{housing.id}}"
+      >
+        Details
+      </button>
     </div>
   </div>
-
 </div>
 
