@@ -27,6 +27,7 @@ export class AuthService {
   }
 
   getSession(): Session {
+
     return JSON.parse(sessionStorage.getItem('session'));
   }
 }

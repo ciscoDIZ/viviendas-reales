@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         console.log($data)
         this.activatedUser = this.jwtHelperService.decodeToken<ActivatedUser>($data.token);
         sessionStorage.setItem('session', JSON.stringify(this.activatedUser));
-        this.router.navigate(['private/dashboard'])
+        this.router.navigate(['private/dashboard']).then(() => window.location.reload())
       }
     )
 

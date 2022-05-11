@@ -15,7 +15,7 @@ export class HousingService {
   }
 
   getAll(query: string = ''): Observable<Paginate<Housing>> {
-      return this.http.get<Paginate<Housing>>(this.apiBase+query)
+      return this.http.get<Paginate<Housing>>(this.apiBase)
   }
 
   getById(id: string): Observable<Housing> {

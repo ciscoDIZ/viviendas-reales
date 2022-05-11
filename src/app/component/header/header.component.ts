@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Session} from "../../interface/session";
 import {AuthService} from "../../service/auth.service";
 import {Router} from "@angular/router";
@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  @Input()
   session: Session;
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -16,8 +17,11 @@ export class HeaderComponent implements OnInit {
     this.session = this.authService.getSession()
   }
 
+
+
   endSession() {
     this.authService.logOut();
-    this.router.navigate(['/']);
+    this.session = null;
+    this.router.navigate(['/public/dashboard']).then(() => window.location.reload());
   }
 }

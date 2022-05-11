@@ -1,1 +1,22 @@
-<p>housing-details works!</p>
+<div class="container" *ngIf="housing">
+  <h1>{{housing.address.name}}, {{housing.address.number}}</h1>
+  <img class="img-fluid" [src]="housing.mainImage.apiUri" alt="">
+  <div class="container">
+    <div class="row">
+      <h2>Comments</h2>
+      <div class="col-12" *ngFor="let comment of housing.comments">
+        <h3>{{comment.title}}</h3>
+        <p>{{comment.content}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <h2>Images</h2>
+      <div class="col-4" *ngFor="let image of housing.images">
+        <h3>{{image.title}}</h3>
+        <img class="img-fluid" [src]="image.apiUri" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+
+
