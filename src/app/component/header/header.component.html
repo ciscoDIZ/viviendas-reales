@@ -1,18 +1,63 @@
-<nav *ngIf="session; else publicHeader" class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/private/dashboard">Navbar</a>
+    <a class="navbar-brand" [routerLink]="dashboardRoute">Viviendas Reales</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" [id]="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/private/dashboard">Home</a>
+          <a class="nav-link active" aria-current="page" [routerLink]="dashboardRoute">Home</a>
         </li>
+        <li class="nav-item"><a [routerLink]="housingsRoute" class="nav-link">Housings</a></li>
       </ul>
-      <div class="btn-group mx-3">
-        <button class="btn btn-primary" (click)="endSession()">Logout</button>
+      <div *ngIf="session && user; else withoutSession" class="btn-group mx-3">
+        <div class="button-group">
+        <div class="dropdown">
+
+            <a disabled class="btn btn-dark p-1" ><img id="avatar" class="img-fluid" src="{{user.avatar}}" alt=""></a>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+            </button>
+
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li>
+              <button
+                routerLink="/private/user/details"
+                class="dropdown-item"
+                type="button"
+              >
+                Profile
+              </button>
+            </li>
+            <li>
+              <button
+                routerLink="/private/housing/create"
+                class="dropdown-item"
+                type="button"
+              >
+                Create rent
+              </button>
+            </li>
+            <li>
+              <button
+                routerLink="/private/housing/me"
+                class="dropdown-item"
+                type="button"
+              >
+                My housings
+              </button>
+            </li>
+            <li><button (click)="endSession()" class="dropdown-item" type="button">Logout</button></li>
+          </ul>
+        </div>
+        </div>
       </div>
+      <ng-template #withoutSession>
+        <div class="btn-group mx-3">
+          <button class="btn btn-secondary" [routerLink]="publicLoginRoute">Login</button>
+        </div>
+      </ng-template>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-secondary" type="submit">Search</button>
@@ -20,28 +65,4 @@
     </div>
   </div>
 </nav>
-<ng-template #publicHeader>
-  <nav  class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/public/dashboard">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" [id]="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/public/dashboard">Home</a>
-          </li>
-        </ul>
-        <div class="btn-group mx-3">
-          <button class="btn btn-secondary" routerLink="/public/login">Login</button>
-          <button class="btn btn-secondary" routerLink="/public/register">Register</button>
-        </div>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-secondary" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-</ng-template>
+

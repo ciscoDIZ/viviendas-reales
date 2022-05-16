@@ -7,6 +7,7 @@ import { RegisterComponent } from './component/register/register.component';
 import { PublicComponent } from './public.component';
 import { ActivationComponent } from './component/activation/activation.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {SharedUtilsModule} from "../shared-utils/shared-utils.module";
 
 
 @NgModule({
@@ -15,12 +16,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     LoginComponent,
     RegisterComponent,
     ActivationComponent,
-
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedUtilsModule,
     PublicRoutingModule,
   ]
 })

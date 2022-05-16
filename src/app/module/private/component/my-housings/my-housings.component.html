@@ -1,0 +1,23 @@
+<div class="container" *ngIf="paginatedHousings">
+  <div class="row align-items-stretch">
+    <div *ngFor="let housing of paginatedHousings.list" class="col-4">
+      <div class="card my-3" style="width: 18rem;">
+        <img *ngIf="housing.mainImage" [src]="housing.mainImage.apiUri" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{housing.address.name}}, {{housing.address.number}}</h5>
+          <p class="card-text">{{housing.description | readMore: 100}} </p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><span>surface: </span>{{housing.surface}}</li>
+          <li class="list-group-item"><span>price: </span>{{housing.price}}</li>
+        </ul>
+        <div class="card-body">
+          <div class="btn-group">
+            <button routerLink="/private/housing/edit/{{housing.id}}" class="btn btn-primary">edit</button>
+            <button (click)="removeHousing(housing.id)" class="btn btn-danger">delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

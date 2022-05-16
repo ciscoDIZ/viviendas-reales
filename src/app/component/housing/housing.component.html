@@ -1,0 +1,38 @@
+<div *ngIf="housingPaginate" class="container">
+
+  <div *ngIf="pagination; else withoutPagination" class="row">
+    <div class="col-4" *ngFor="let housing of housingPaginate.list |
+    paginate: {
+      id: 'DEFAULT_PAGINATION_ID',
+      currentPage: page,
+      itemsPerPage: pageSize,
+      totalItems: total
+    }">
+      <h2>{{housing.address.name}}, {{housing.address.number}}</h2>
+      <img *ngIf="housing.mainImage" class="img-fluid" [src]="housing.mainImage.apiUri" alt=""/>
+      <button [routerLink]="getDetailsLink(housing.id)" class="btn btn-primary">Details</button>
+    </div>
+    <pagination-controls
+      (pageChange)="pageChanged(housingPaginate.pagination.next)"
+      (pageBoundsCorrection)="pageChanged($event)"
+      [maxSize]="housingPaginate.pagination.limit"
+      [autoHide]="false"
+      [responsive]="true"
+      previousLabel="Previous"
+      nextLabel="Next"
+      screenReaderPaginationLabel="Pagination"
+      screenReaderPageLabel="page"
+      screenReaderCurrentLabel="You're on page">
+    </pagination-controls>
+
+  </div>
+  <ng-template #withoutPagination>
+    <div class="row">
+      <div class="col-4" *ngFor="let housing of housingPaginate.list">
+        <h2>{{housing.address.name}}, {{housing.address.number}}</h2>
+        <img *ngIf="housing.mainImage" class="img-fluid" [src]="housing.mainImage.apiUri" alt=""/>
+        <button [routerLink]="getDetailsLink(housing.id)" class="btn btn-primary">Details</button>
+      </div>
+    </div>
+  </ng-template>
+</div>

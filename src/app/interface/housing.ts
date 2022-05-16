@@ -1,14 +1,8 @@
 import {Comment} from "./comment";
+import {Address} from "./address";
 
 export interface Housing {
-  address: {
-    state: string;
-    province: string;
-    name: string;
-    road: string;
-    number: string;
-    floor: string;
-  }
+  address: Address;
   description: string;
   id: string;
   images: [

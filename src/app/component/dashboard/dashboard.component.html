@@ -1,15 +1,2 @@
-<div class="container">
-  <div class="row">
-    <div class="col-4" *ngFor="let housing of housings">
-      <h2>{{housing.address.name}}, {{housing.address.number}}</h2>
-      <img src="{{housing.mainImage.apiUri}}" alt="">
-      <button
-        class="btn btn-primary"
-        routerLink="{{(session) ? privateRoute : publicRoute}}/{{housing.id}}"
-      >
-        Details
-      </button>
-    </div>
-  </div>
-</div>
+<app-housing [pagination]="false"></app-housing>
 

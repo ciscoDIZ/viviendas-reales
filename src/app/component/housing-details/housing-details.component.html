@@ -1,22 +1,30 @@
 <div class="container" *ngIf="housing">
-  <h1>{{housing.address.name}}, {{housing.address.number}}</h1>
-  <img class="img-fluid" [src]="housing.mainImage.apiUri" alt="">
-  <div class="container">
-    <div class="row">
-      <h2>Comments</h2>
-      <div class="col-12" *ngFor="let comment of housing.comments">
-        <h3>{{comment.title}}</h3>
-        <p>{{comment.content}}</p>
-      </div>
+  <div class="row">
+    <h1>{{housing.address.name}}, {{housing.address.number}}</h1>
+    <div class="col-6">
+      <img class="img-fluid" routerLink="/image/details/{{housing.mainImage.id}}" [src]="housing.mainImage.apiUri" alt="">
     </div>
-    <div class="row">
-      <h2>Images</h2>
-      <div class="col-4" *ngFor="let image of housing.images">
-        <h3>{{image.title}}</h3>
-        <img class="img-fluid" [src]="image.apiUri" alt="">
-      </div>
+    <div class="col-6">
+      <p>{{housing.description | readMore: 300: showMore}}</p>
+      <button *ngIf="!showMore; else showLess" (click)="toggleShow()">Read more</button>
+      <ng-template #showLess>
+        <button (click)="toggleShow()">Show less</button>
+      </ng-template>
     </div>
   </div>
+  <div class="row">
+    <h2 routerLink="/comment/housing/{{housing.id}}">Comments</h2>
+    <app-comment [parent]="housing" [session]="session" [instance]="'housing'"></app-comment>
+  </div>
+  <div class="row">
+    <h2 routerLink="/image/{{housing.id}}">Images</h2>
+    <div class="col-4" *ngFor="let image of housing.images">
+      <h3>{{image.title}}</h3>
+      <img class="img-fluid" routerLink="/image/details/{{image.id}}" [src]="image.apiUri" alt="">
+    </div>
+  </div>
+</div>
+<div>
 </div>
 
 
