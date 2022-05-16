@@ -1,0 +1,8 @@
+
+<div *ngIf="image" class="container">
+  <h1>{{image.title}}</h1>
+  <img src="{{image.apiUri}}" alt="">
+  <h2>comments</h2>
+  <app-comment [parent]="image" [instance]="'image'" [session]="session" ></app-comment>
+</div>
+

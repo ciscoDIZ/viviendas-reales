@@ -24,4 +24,19 @@ export class CommentService {
     const options = { headers };
     return this.http.post<Comment>(this.apiBase, comment, options);
   }
+
+  sendLike(id: string): Observable<Comment> {
+
+    let observable: Observable<Comment>;
+    this.authService.getSession().subscribe({
+      next: (session) => {
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${this.authService.getToken()}`
+        });
+        const options = { headers };
+        observable = this.http.patch<Comment>(`${this.apiBase}/like/${id}`, {like: session.id}, options);
+      }
+    });
+    return observable;
+  }
 }

@@ -1,0 +1,45 @@
+
+
+<section style="background-color: #eee;">
+  <div class="container-fluid my-5 py-5">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-12 col-lg-10 col-xl-8">
+        <div class="card">
+          <div *ngIf="comments">
+            <app-comment-details
+              *ngFor="let comment of comments.list"
+              [comment]="comment"
+              [session]="session"
+            ></app-comment-details>
+          </div>
+          <form (ngSubmit)="onSubmit()">
+            <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+              <div class="d-flex flex-start w-100">
+                <div *ngIf="user">
+                  <img *ngIf="user.avatar"  class="rounded-circle shadow-1-strong me-3"
+                       src="{{user.avatar}}" alt="avatar" width="40"
+                       height="40"/>
+                </div>
+
+                <div class="form-outline w-100">
+
+                <textarea [(ngModel)]="postComment.content" name="content" class="form-control" id="content" rows="4"
+                          style="background: #fff;"></textarea>
+                  <label class="form-label" for="content">Message</label>
+                </div>
+              </div>
+              <div class="float-end mt-2 pt-1">
+                <button [disabled]="!session" [ngClass]="!session ? 'btn-danger' : 'btn-success'"
+                        class="btn btn-primary btn-sm">Post comment
+                </button>
+                <a type="" class="btn btn-outline-primary btn-sm">Cancel</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+

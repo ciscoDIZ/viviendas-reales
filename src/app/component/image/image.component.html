@@ -1,0 +1,10 @@
+<div *ngIf="images" class="container">
+  <div *ngFor="let image of images.list" class="row">
+    <div class="col-4">
+      <h5>{{image.title}}</h5>
+      <img src="{{image.apiUri}}" alt="">
+      <p>{{image.createdAt}}</p>
+      <button routerLink="/image/details/{{image.id}}">details</button>
+    </div>
+  </div>
+</div>
