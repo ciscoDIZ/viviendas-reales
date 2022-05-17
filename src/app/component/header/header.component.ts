@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {Session} from "../../interface/session";
 import {AuthService} from "../../service/auth.service";
 import {Router} from "@angular/router";
@@ -11,8 +11,7 @@ import {Subscription} from "rxjs";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-  @Input()
+export class HeaderComponent implements OnInit{
   session: Session;
   user: User;
   navbarSupportedContent: string;
@@ -27,7 +26,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   privateRouteNewRent: string;
   privateRouteMyRents: string;
   profileRoute: string;
-  subscription: Subscription;
 
   constructor(private authService: AuthService, private router: Router, private userService: UserService) {
     this.navbarSupportedContent = 'navbarSupportedContent';
@@ -44,15 +42,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.authService.currentSession.subscribe({next: (session) => this.session = session});
-    this.authService.getSession().subscribe($data => this.session = $data);
-    if (this.session) {
-      this.getUser();
-    }
-  }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.authService.getSession().subscribe($data => {
+      if ($data) {
+        this.getUser();
+      }
+    });
+
   }
 
 
@@ -62,7 +58,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   endSession() {
     this.authService.logOut();
-    this.router.navigate(['/public/login']).then(() => window.location.reload());
     this.session = null;
+   /* this.router.navigate(['/public/login']).then(() => window.location.reload());*/
+
+  }
+
+
+  onSession($event: Session) {
+    this.session = $event;
+    this.getUser();
+    console.log(this.session);
   }
 }

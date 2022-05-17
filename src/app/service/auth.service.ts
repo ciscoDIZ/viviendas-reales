@@ -12,8 +12,7 @@ import {ResponseMsg} from "../interface/response-msg";
 })
 export class AuthService {
   private readonly baseUri: string;
-  private sessionSource = new BehaviorSubject(undefined);
-  currentSession: Observable<Session> = this.sessionSource.asObservable();
+
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
     this.baseUri = 'http://localhost:5000/api/auth';
   }
@@ -43,9 +42,7 @@ export class AuthService {
     return JSON.parse(sessionStorage.getItem('session')).token;
   }
 
-  sendSession(session: Session) {
-    this.sessionSource.next(session);
-  }
+
 
   verify(payload: object): Observable<ResponseMsg> {
     const headers = new HttpHeaders({

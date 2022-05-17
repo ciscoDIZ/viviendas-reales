@@ -11,7 +11,7 @@
         </li>
         <li class="nav-item"><a [routerLink]="housingsRoute" class="nav-link">Housings</a></li>
         <li *ngIf="!session; else profile" class="nav-item">
-          <a class="nav-link" [routerLink]="publicLoginRoute" >Login</a>
+          <a class="nav-link" data-bs-toggle="modal" data-bs-target="#login">Login</a>
         </li>
         <ng-template #profile>
           <li class="nav-item dropdown d-lg-none">
@@ -47,3 +47,20 @@
     </div>
   </div>
 </nav>
+<button type="button" class="btn btn-primary" >
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div #modal class="modal fade" id="login" tabindex="-1" aria-labelledby="login" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+        <public-login [modal]="modal" (currentSession)="onSession($event)"></public-login>
+    </div>
+  </div>
+</div>

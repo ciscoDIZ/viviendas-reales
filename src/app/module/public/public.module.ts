@@ -11,18 +11,21 @@ import {SharedUtilsModule} from "../shared-utils/shared-utils.module";
 
 
 @NgModule({
-  declarations: [
-    PublicComponent,
-    LoginComponent,
-    RegisterComponent,
-    ActivationComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedUtilsModule,
-    PublicRoutingModule,
-  ]
+    declarations: [
+        PublicComponent,
+        LoginComponent,
+        RegisterComponent,
+        ActivationComponent,
+    ],
+    exports: [
+        LoginComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SharedUtilsModule,
+        PublicRoutingModule,
+    ]
 })
 export class PublicModule { }

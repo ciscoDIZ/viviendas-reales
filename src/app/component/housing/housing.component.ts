@@ -18,9 +18,6 @@ export class HousingComponent implements OnInit {
   total: number;
   @Input()
   pagination: boolean = true;
-  pageChange: EventEmitter<number>;
-  pageBoundsCorrection: EventEmitter<number>;
-  paginate: PaginationInstance;
   constructor(private housingService: HousingService) {}
 
   ngOnInit(): void {

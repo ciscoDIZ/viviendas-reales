@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Login} from "../../../../interface/login";
 import {AuthService} from "../../../../service/auth.service";
 
@@ -13,32 +13,37 @@ import {Session} from "../../../../interface/session";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
 
   login: Login;
+  @Input()
+  modal: HTMLDivElement;
   errorMessage: string | undefined;
-  subscription: Subscription;
+  @Output()
+  private currentSession: EventEmitter<Session>;
   private session: Session;
   constructor(
     private loginService: AuthService,
     private location: Location,
-    private route: Router
-  ) {}
+    private route: Router,
+  ) {
+    this.currentSession = new EventEmitter<Session>();
+  }
 
 
   ngOnInit(): void {
-    this.subscription = this.loginService.currentSession.subscribe({next:session => this.session = session})
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 
   sendSession() {
 
 
   }
   onSubmit(loginForm: NgForm) {
+
+  this.modal.addEventListener('show.bs.modal', function (event) {
+    console.log(event.target);
+  });
     this.loginService.singIn(<Login>{ payload: loginForm.value })
       .subscribe(
         {
@@ -46,9 +51,11 @@ export class LoginComponent implements OnInit, OnDestroy {
             sessionStorage.setItem('session', JSON.stringify(authenticatedUser));
             this.loginService.getSession().subscribe({
               next: (session) => {
-
-                this.loginService.sendSession(session);
-                this.route.navigate([`/private/user/profile/me/${session.id}`]).then(() => window.location.reload());
+                debugger;
+                this.currentSession.emit(session);
+                this.modal.setAttribute('data-dismiss', 'modal');
+                // @ts-ignore
+                console.log(this.modal.hide())
               }
             })
 
