@@ -4,19 +4,20 @@
          src="{{comment.author.avatar}}" alt="avatar" width="60"
          height="60"/>
     <div>
-      <h6 class="fw-bold text-primary mb-1">{{comment.author.name}} {{comment.author.surname}}</h6>
+      <h6 routerLink="/user/profile/{{comment.author.id}}" class="fw-bold text-primary mb-1">{{comment.author.name}} {{comment.author.surname}}</h6>
       <p class="text-muted small mb-0">
-        {{comment.createdAt}}
+        {{comment.createdAt | date}}
       </p>
     </div>
   </div>
 
+  <h6 *ngIf="comment.title" class="fw-bold mb-1 mt-1">{{comment.title}}</h6>
   <p class="mt-3 mb-4 pb-2">
     {{comment.content}}
   </p>
 
   <div class="small d-flex justify-content-start">
-    <button [disabled]="!session" (click)="onLike()" class="btn btn-primary d-flex align-items-center me-3">
+    <button [disabled]="!session" (click)="onLike(session.id)" class="btn btn-primary d-flex align-items-center me-3">
       <i class="far fa-thumbs-up me-2"></i>
       <p class="mb-0">Like</p>
     </button><span>{{comment.likes.length}}</span>

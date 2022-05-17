@@ -39,4 +39,18 @@ export class CommentService {
     });
     return observable;
   }
+  sendDislike(id: string): Observable<Comment> {
+    let observable: Observable<Comment>
+    this.authService.getSession().subscribe({
+      next: (session) => {
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${this.authService.getToken()}`
+        });
+        const options = { headers };
+        observable = this.http.patch<Comment>(`${this.apiBase}/like/remove/${id}`, {author: session.id}, options);
+      }
+    });
+    return observable;
+  }
 }
+

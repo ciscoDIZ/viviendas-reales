@@ -6,6 +6,7 @@ export interface User {
   surname: string
   avatar: string;
   email: string;
+  residence: string;
   housings: Housing[];
 
 }

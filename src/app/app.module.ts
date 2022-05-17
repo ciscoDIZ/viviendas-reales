@@ -19,6 +19,7 @@ import {SharedUtilsModule} from "./module/shared-utils/shared-utils.module";
 import { CommentComponent } from './component/comment/comment.component';
 import { CommentDetailsComponent } from './component/comment-details/comment-details.component';
 import {FormsModule} from "@angular/forms";
+import { ProfileComponent } from './component/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {FormsModule} from "@angular/forms";
     ImageDetailsComponent,
     CommentComponent,
     CommentDetailsComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

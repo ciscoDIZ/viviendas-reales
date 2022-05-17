@@ -67,4 +67,29 @@ export class HousingService {
     const options = { headers };
     return this.http.delete<void>(`${this.apiBase}/${id}`,options);
   }
+  sendLike(id: string): Observable<Housing> {
+    let observable: Observable<Housing>;
+    this.authService.getSession().subscribe({
+      next: (session) => {
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${this.authService.getToken()}`
+        })
+        const options = { headers };
+        observable = this.http.patch<Housing>(`${this.apiBase}/like/${id}`, {userId: session.id}, options);
+      }
+    })
+    return observable;
+  }
+  sendDislike(id: string): Observable<Housing> {
+    let observable: Observable<Housing>;
+    this.authService.getSession().subscribe({next: (session) => {
+        const headers = new HttpHeaders({
+          'Authorization': `Bearer ${this.authService.getToken()}`
+        });
+        const options = { headers };
+        observable = this.http.patch<Housing>(`${this.apiBase}/like/remove/${id}`, {userId: session.id}, options)
+      }
+    })
+    return observable;
+  }
 }

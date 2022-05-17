@@ -74,6 +74,7 @@ export class CommentComponent implements OnInit {
       next: comment => {
         this.comments.list.push(comment);
         this.postComment.content = '';
+        this.postComment.title = '';
       },
       error: response => console.log(response.error.message)
     })

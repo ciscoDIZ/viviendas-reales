@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
         name: new FormControl('', [Validators.required, Validators.minLength(3)]),
         surname: new FormControl('', [Validators.required, Validators.minLength(3)]),
         email: new FormControl('', [Validators.required, Validators.email]),
+        residence: new FormControl('', []),
         password: new FormControl('', [Validators.required]),
         rePassword: new FormControl('', [Validators.required])
       }
@@ -27,11 +28,11 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const { name, surname, email, password, rePassword } = this.form.value;
+    const { name, surname, email, password, rePassword, residence } = this.form.value;
     if (password != rePassword) {
       return;
     }
-    const user: PostUser = {name,surname,email,password};
+    const user: PostUser = {name,surname,email,password, residence};
     this.userService.create(user).subscribe($data => this.getUser = $data);
   }
 }

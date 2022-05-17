@@ -15,15 +15,31 @@ export class CommentDetailsComponent implements OnInit {
   comment: Comment
   @Input()
   session: Session;
+  @Input()
+  likes: string[];
   constructor(private commentService: CommentService) { }
 
   ngOnInit(): void {
   }
 
-  onLike(): void {
+  onLike(id: string): void {
+    if (this.comment.likes.map(m => m.toString()).find(f => f === id)) {
+      this.removeLike();
+      return;
+    }
+    this.addLike();
+  }
+
+  addLike(): void {
     this.commentService.sendLike(this.comment.id).subscribe({
       next: (comment) => this.comment = comment,
       error: (response) => console.error(response.error.message)
     })
+  }
+  removeLike(): void {
+    this.commentService.sendDislike(this.comment.id).subscribe({
+      next: (comment) => this.comment = comment,
+      error: (response) => console.error(response.error.message)
+    });
   }
 }

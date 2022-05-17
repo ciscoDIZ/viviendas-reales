@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import {Paginate} from "../../interface/paginate";
 import {Housing} from "../../interface/housing";
 import {HousingService} from "../../service/housing.service";
 import {Session} from "../../interface/session";
+import {PaginationInstance} from "ngx-pagination";
 
 @Component({
   selector: 'app-housing',
@@ -17,6 +18,9 @@ export class HousingComponent implements OnInit {
   total: number;
   @Input()
   pagination: boolean = true;
+  pageChange: EventEmitter<number>;
+  pageBoundsCorrection: EventEmitter<number>;
+  paginate: PaginationInstance;
   constructor(private housingService: HousingService) {}
 
   ngOnInit(): void {
@@ -37,6 +41,10 @@ export class HousingComponent implements OnInit {
   }
 
   pageChanged($event: number) {
+    if (!$event) {
+      $event = 1;
+    }
+    this.page = $event;
     this.housingService.getAll(`page=${$event}`).subscribe($data => this.housingPaginate = $data);
   }
 }

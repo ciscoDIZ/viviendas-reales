@@ -5,14 +5,20 @@
     <div class="row d-flex justify-content-center">
       <div class="col-md-12 col-lg-10 col-xl-8">
         <div class="card">
+
           <div *ngIf="comments">
             <app-comment-details
               *ngFor="let comment of comments.list"
               [comment]="comment"
               [session]="session"
+              [likes]="comment.likes"
             ></app-comment-details>
           </div>
           <form (ngSubmit)="onSubmit()">
+            <div class="form-floating w-100">
+              <input class="form-control" placeholder="set your title" [(ngModel)]="postComment.title" name="title" id="title" type="text">
+              <label  for="title">Title</label>
+            </div>
             <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
               <div class="d-flex flex-start w-100">
                 <div *ngIf="user">

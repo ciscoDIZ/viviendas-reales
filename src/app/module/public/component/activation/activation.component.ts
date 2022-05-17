@@ -33,7 +33,7 @@ export class ActivationComponent implements OnInit {
     this.loggedUser = this.jwtHelperService.decodeToken<Session>(this.activatedUser.token);
     sessionStorage.setItem('session', JSON.stringify(this.loggedUser));
     this.router
-      .navigate(['private/dashboard'])
+      .navigate(['/dashboard'])
       .then(() => window.location.reload());
   }
 

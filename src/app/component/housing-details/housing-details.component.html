@@ -4,6 +4,9 @@
     <div class="col-6">
       <img class="img-fluid" routerLink="/image/details/{{housing.mainImage.id}}" [src]="housing.mainImage.apiUri" alt="">
     </div>
+    <div>
+      <a (click)="onLike(session.id)">Like</a><span>{{housing.likes.length}}</span>
+    </div>
     <div class="col-6">
       <p>{{housing.description | readMore: 300: showMore}}</p>
       <button *ngIf="!showMore; else showLess" (click)="toggleShow()">Read more</button>

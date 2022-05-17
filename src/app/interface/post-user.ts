@@ -3,4 +3,5 @@ export interface PostUser {
     surname: string;
     email: string;
     password: string;
+    residence: string;
 }

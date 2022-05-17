@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Housing} from "../../interface/housing";
 import {HousingService} from "../../service/housing.service";
 import {Session} from "../../interface/session";
 import {AuthService} from "../../service/auth.service";
+import {Image} from "../../interface/image";
 
 @Component({
   selector: 'app-housing-details',
@@ -34,5 +35,30 @@ export class HousingDetailsComponent implements OnInit {
 
   toggleShow(): void {
     this.showMore = !this.showMore;
+  }
+
+  onLike(id: string): void {
+    if (this.housing.likes.map(m => m.toString()).find(f => f === id)) {
+      this.removeLike();
+      return;
+    }
+    this.addLike();
+  }
+
+  addLike(): void {
+    this.housingService.sendLike(this.housing.id).subscribe({
+      next: (housing) => {
+        this.housing = housing;
+      },
+      error: response => console.error(response.error.message)
+    })
+  }
+  removeLike(): void {
+    this.housingService.sendDislike(this.housing.id).subscribe({
+      next: (housing) => {
+        this.housing = housing;
+      },
+      error: response => console.error(response.error.message)
+    })
   }
 }

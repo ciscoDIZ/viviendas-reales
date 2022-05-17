@@ -7,6 +7,7 @@ import {EditHousingComponent} from "./component/edit-housing/edit-housing.compon
 import {UserDetailsComponent} from "./component/user-details/user-details.component";
 import {PasswordChangeComponent} from "./component/password-change/password-change.component";
 import {MyCommentsComponent} from "./component/my-comments/my-comments.component";
+import {ProfileComponent} from "../../component/profile/profile.component";
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'housing/edit/:id', component: EditHousingComponent },
       { path: 'user/details', component: UserDetailsComponent },
       { path: 'user/password/change', component: PasswordChangeComponent },
+      { path: 'user/profile/me/:id', component: ProfileComponent },
       { path: 'comment/me', component: MyCommentsComponent }
 
   ]

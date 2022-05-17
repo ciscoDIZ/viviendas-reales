@@ -15,6 +15,11 @@
                placeholder="name@example.com">
         <label for="email">Email address</label>
       </div>
+      <div class="col-12 form-floating mb-3">
+        <input type="text" class="form-control" [(ngModel)]="user.residence" name="residence" id="residence"
+               placeholder="Your residence...">
+        <label for="email">Residence</label>
+      </div>
       <div class="col">
         <input class="form-control" (change)="upload($event)" id="file" type="file">
         <label for="file">Image</label>

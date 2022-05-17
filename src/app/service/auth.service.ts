@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Login} from "../interface/login";
-import { Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {Session} from "../interface/session";
 import {ActivatedUser} from "../interface/activated-user";
 import {JwtHelperService} from "@auth0/angular-jwt";
@@ -12,6 +12,8 @@ import {ResponseMsg} from "../interface/response-msg";
 })
 export class AuthService {
   private readonly baseUri: string;
+  private sessionSource = new BehaviorSubject(undefined);
+  currentSession: Observable<Session> = this.sessionSource.asObservable();
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
     this.baseUri = 'http://localhost:5000/api/auth';
   }
@@ -39,6 +41,10 @@ export class AuthService {
 
   getToken(): string {
     return JSON.parse(sessionStorage.getItem('session')).token;
+  }
+
+  sendSession(session: Session) {
+    this.sessionSource.next(session);
   }
 
   verify(payload: object): Observable<ResponseMsg> {

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container-fluid">
+  <div class="container">
     <a class="navbar-brand" [routerLink]="dashboardRoute">Viviendas Reales</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -10,54 +10,36 @@
           <a class="nav-link active" aria-current="page" [routerLink]="dashboardRoute">Home</a>
         </li>
         <li class="nav-item"><a [routerLink]="housingsRoute" class="nav-link">Housings</a></li>
+        <li *ngIf="!session; else profile" class="nav-item">
+          <a class="nav-link" [routerLink]="publicLoginRoute" >Login</a>
+        </li>
+        <ng-template #profile>
+          <li class="nav-item dropdown d-lg-none">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Profile
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" [routerLink]="privateRouteNewRent">New rent...</a></li>
+              <li><a class="dropdown-item" [routerLink]="privateRouteMyRents">My rents</a></li>
+              <li><a class="dropdown-item" [routerLink]="privateRouteProfile">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" (click)="endSession()">Sign out</a></li>
+            </ul>
+          </li>
+        </ng-template>
       </ul>
-      <div *ngIf="session && user; else withoutSession" class="btn-group mx-3">
-        <div class="button-group">
-        <div class="dropdown">
-
-            <a disabled class="btn btn-dark p-1" ><img id="avatar" class="img-fluid" src="{{user.avatar}}" alt=""></a>
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-            </button>
-
-
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <li>
-              <button
-                routerLink="/private/user/details"
-                class="dropdown-item"
-                type="button"
-              >
-                Profile
-              </button>
-            </li>
-            <li>
-              <button
-                routerLink="/private/housing/create"
-                class="dropdown-item"
-                type="button"
-              >
-                Create rent
-              </button>
-            </li>
-            <li>
-              <button
-                routerLink="/private/housing/me"
-                class="dropdown-item"
-                type="button"
-              >
-                My housings
-              </button>
-            </li>
-            <li><button (click)="endSession()" class="dropdown-item" type="button">Logout</button></li>
-          </ul>
-        </div>
-        </div>
+      <div *ngIf="session && user" class="d-none d-lg-block dropdown text-end">
+        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+          <img [src]="(user.avatar) ? user.avatar : 'assets/default.png'" alt="mdo" width="32" height="32" class="rounded-circle">
+        </a>
+        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+          <li><a class="dropdown-item" [routerLink]="privateRouteNewRent">New rent...</a></li>
+          <li><a class="dropdown-item" [routerLink]="privateRouteMyRents">My rents</a></li>
+          <li><a class="dropdown-item" routerLink="private/user/profile/me/{{session.id}}">Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" (click)="endSession()">Sign out</a></li>
+        </ul>
       </div>
-      <ng-template #withoutSession>
-        <div class="btn-group mx-3">
-          <button class="btn btn-secondary" [routerLink]="publicLoginRoute">Login</button>
-        </div>
-      </ng-template>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-secondary" type="submit">Search</button>
@@ -65,4 +47,3 @@
     </div>
   </div>
 </nav>
-
