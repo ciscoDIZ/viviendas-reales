@@ -20,6 +20,10 @@ import { CommentComponent } from './component/comment/comment.component';
 import { CommentDetailsComponent } from './component/comment-details/comment-details.component';
 import {FormsModule} from "@angular/forms";
 import { ProfileComponent } from './component/profile/profile.component';
+import { Error404Component } from './component/error404/error404.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { HousingByOwnerComponent } from './housing-by-owner/housing-by-owner.component';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +38,8 @@ import { ProfileComponent } from './component/profile/profile.component';
     CommentComponent,
     CommentDetailsComponent,
     ProfileComponent,
+    Error404Component,
+    HousingByOwnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,8 @@ import { ProfileComponent } from './component/profile/profile.component';
     PrivateModule,
     SharedUtilsModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [
     {

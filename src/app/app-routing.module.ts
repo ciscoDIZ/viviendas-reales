@@ -7,6 +7,8 @@ import {ImageDetailsComponent} from "./component/image-details/image-details.com
 import {DashboardComponent} from "./component/dashboard/dashboard.component";
 import {CommentComponent} from "./component/comment/comment.component";
 import {ProfileComponent} from "./component/profile/profile.component";
+import {Error404Component} from "./component/error404/error404.component";
+import {HousingByOwnerComponent} from "./housing-by-owner/housing-by-owner.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -16,7 +18,8 @@ const routes: Routes = [
   { path: 'image/:housing', component: ImageComponent },
   { path: 'image/details/:id', component: ImageDetailsComponent },
   { path: 'comment/:instance/:id', component: CommentComponent },
-  { path: 'user/profile/:id', component: ProfileComponent }
+  { path: 'user/profile/:id', component: ProfileComponent },
+  { path: 'housing/:owner', component: HousingByOwnerComponent }
 ];
 
 @NgModule({

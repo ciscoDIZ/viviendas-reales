@@ -12,6 +12,8 @@ import { UserUpdateComponent } from './component/user-update/user-update.compone
 import { PasswordChangeComponent } from './component/password-change/password-change.component';
 import {SharedUtilsModule} from "../shared-utils/shared-utils.module";
 import {MyCommentsComponent} from "./component/my-comments/my-comments.component";
+import {NgxPaginationModule} from "ngx-pagination";
+import { EditCommentComponent } from './component/edit-comment/edit-comment.component';
 
 
 @NgModule({
@@ -24,13 +26,15 @@ import {MyCommentsComponent} from "./component/my-comments/my-comments.component
     UserDetailsComponent,
     UserUpdateComponent,
     PasswordChangeComponent,
+    EditCommentComponent,
   ],
     imports: [
         CommonModule,
         PrivateRoutingModule,
         ReactiveFormsModule,
         FormsModule,
-      SharedUtilsModule
+        SharedUtilsModule,
+        NgxPaginationModule
     ],
   exports: [
   ]

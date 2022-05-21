@@ -1,6 +1,7 @@
 import {Housing} from "./housing";
 
 export interface User {
+  biography: string;
   id: string;
   name: string;
   surname: string

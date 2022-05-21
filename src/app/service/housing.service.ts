@@ -31,8 +31,8 @@ export class HousingService {
     return this.http.get<Housing>(`${this.apiBase}/${id}`)
   }
 
-  getByOwner(owner: string): Observable<Paginate<Housing>> {
-    return this.http.get<Paginate<Housing>>(`${this.apiBase}/owner/${owner}`);
+  getByOwner(owner: string, page: number = 1, limit: number = 10): Observable<Paginate<Housing>> {
+    return this.http.get<Paginate<Housing>>(`${this.apiBase}/owner/${owner}?limit=${limit}`);
   }
 
   create(body: PostHousing): Observable<Housing> {

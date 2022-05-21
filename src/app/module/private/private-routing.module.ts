@@ -8,6 +8,8 @@ import {UserDetailsComponent} from "./component/user-details/user-details.compon
 import {PasswordChangeComponent} from "./component/password-change/password-change.component";
 import {MyCommentsComponent} from "./component/my-comments/my-comments.component";
 import {ProfileComponent} from "../../component/profile/profile.component";
+import {EditCommentComponent} from "./component/edit-comment/edit-comment.component";
+import {Error404Component} from "../../component/error404/error404.component";
 
 
 const routes: Routes = [
@@ -19,7 +21,9 @@ const routes: Routes = [
       { path: 'user/details', component: UserDetailsComponent },
       { path: 'user/password/change', component: PasswordChangeComponent },
       { path: 'user/profile/me/:id', component: ProfileComponent },
-      { path: 'comment/me', component: MyCommentsComponent }
+      { path: 'user/comment/me', component: MyCommentsComponent },
+      { path: 'user/comment/edit/:id', component: EditCommentComponent },
+      { path: '**', component: Error404Component }
 
   ]
 }];

@@ -1,5 +1,6 @@
 <div class="container" *ngIf="housing">
   <div class="row">
+
     <h1>{{housing.address.name}}, {{housing.address.number}}</h1>
     <div class="col-6">
       <img class="img-fluid" routerLink="/image/details/{{housing.mainImage.id}}" [src]="housing.mainImage.apiUri" alt="">

@@ -15,7 +15,8 @@ export class CommentService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getAll(query: any): Observable<Paginate<Comment>> {
-    const querySegment = (query.housing) ? `?housing=${query.housing}` : (query.image) ? `?image=${query.image}` : ''
+    const querySegment = (query.housing) ? `?housing=${query.housing}` :
+      (query.image) ? `?image=${query.image}` : query.author ? `?author=${query.author}`: query;
     return this.http.get<Paginate<Comment>>(`${this.apiBase}${querySegment}`)
   }
 
@@ -51,6 +52,24 @@ export class CommentService {
       }
     });
     return observable;
+  }
+  edit(id: string, comment: PostComment): Observable<Comment> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getToken()}`
+    });
+    const options = { headers };
+    return this.http.patch<Comment>(`${this.apiBase}/${id}`, comment, options);
+  }
+
+  getById(id: string): Observable<Comment> {
+    return this.http.get<Comment>(`${this.apiBase}/${id}`);
+  }
+  delete(id: string): Observable<void> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getToken()}`
+    });
+    const options = { headers };
+    return this.http.delete<void>(`${this.apiBase}/${id}`, options);
   }
 }
 

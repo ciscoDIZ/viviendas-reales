@@ -4,10 +4,11 @@ import {AuthService} from "../../service/auth.service";
 import {Router} from "@angular/router";
 import { User } from '../../interface/user';
 import {UserService} from "../../service/user.service";
-import {Subscription} from "rxjs";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbNav, NgbNavChangeEvent} from "@ng-bootstrap/ng-bootstrap";
 import {NgForm} from "@angular/forms";
 import {Login} from "../../interface/login";
+import { Location } from "@angular/common";
+
 
 @Component({
   selector: 'app-header',
@@ -36,9 +37,17 @@ export class HeaderComponent implements OnInit{
   errorMessage: string | undefined;
   @Output()
   private currentSession: EventEmitter<Session>;
+  activeId: number = 1;
 
 
-  constructor(private loginService: AuthService, private router: Router, private userService: UserService, private modalService: NgbModal) {
+
+  constructor(
+    private loginService: AuthService,
+    private router: Router,
+    private userService: UserService,
+    private modalService: NgbModal,
+    private location: Location
+    ) {
     this.navbarSupportedContent = 'navbarSupportedContent';
     this.dashboardRoute = '/dashboard';
     this.loginService.getSession().subscribe({next: session => this.session = session});
@@ -53,7 +62,6 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
     this.loginService.getSession().subscribe($data => {
       if ($data) {
         this.getUser();
@@ -84,9 +92,7 @@ export class HeaderComponent implements OnInit{
 
   onSubmit(loginForm: NgForm, modal) {
 
-    this.loginService.singIn(<Login>{ payload: loginForm.value })
-      .subscribe(
-        {
+    this.loginService.singIn(<Login>{ payload: loginForm.value }).subscribe({
           next: authenticatedUser => {
             sessionStorage.setItem('session', JSON.stringify(authenticatedUser));
             this.loginService.getSession().subscribe({
@@ -95,13 +101,17 @@ export class HeaderComponent implements OnInit{
                 this.getUser();
                 this.errorMessage = '';
                 modal.close()
-
+                window.location.reload()
               }
             })
-
           },
           error: (err) => this.errorMessage = err.error.message
         }
       );
+  }
+
+
+  navigate($event: NgbNavChangeEvent<any>, nav: NgbNav) {
+    nav.select($event.activeId);
   }
 }

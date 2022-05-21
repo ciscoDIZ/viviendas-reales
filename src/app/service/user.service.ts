@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {CreatedUser} from "../interface/created-user";
 import {User} from "../interface/user";
 import {AuthService} from "./auth.service";
+import {Paginate} from "../interface/paginate";
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,9 @@ export class UserService {
     });
     const options = { headers };
     return this.http.patch<User>(`${this.apiBase}/${id}`, multipart, options);
+  }
+
+  getAll(pagination = false): Observable<User[]> {
+    return this.http.get<User[]>(this.apiBase)
   }
 }

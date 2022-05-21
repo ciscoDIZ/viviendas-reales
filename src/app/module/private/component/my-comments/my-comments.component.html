@@ -1,1 +1,37 @@
-<p>my-comments works!</p>
+<div *ngIf="comments" class="container">
+  <div class="row">
+    <div class="col-12" *ngFor="let comment of comments.list | paginate: {
+    id: '1',
+    currentPage: page,
+    itemsPerPage: pageSize,
+    totalItems: total
+  }"
+    >
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{comment.title}}</h5>
+          <p class="card-text">{{comment.content}}</p>
+          <div class="btn-group">
+            <a routerLink="/private/user/comment/edit/{{comment.id}}" class="btn btn-primary">edit</a>
+            <a (click)="onRemove(comment.id)" class="btn btn-danger">delete</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <pagination-controls
+    id="1"
+    (pageChange)="pageChanged($event)"
+    [maxSize]="comments.pagination.limit"
+    (pageBoundsCorrection)="pageChanged($event)"
+    [autoHide]="false"
+    [responsive]="true"
+    [directionLinks]="true"
+    previousLabel="prev"
+    nextLabel="next"
+    screenReaderPaginationLabel="pagination"
+    screenReaderPageLabel="page"
+    screenReaderCurrentLabel="You're on page"
+  ></pagination-controls>
+</div>

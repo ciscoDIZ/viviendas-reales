@@ -20,6 +20,10 @@
                placeholder="Your residence...">
         <label for="email">Residence</label>
       </div>
+      <div class="col-12 form-floating mb-3">
+        <textarea id="bio" [(ngModel)]="user.biography" name="biography" class="form-control" placeholder="your biography"></textarea>
+        <label for="bio">Biography</label>
+      </div>
       <div class="col">
         <input class="form-control" (change)="upload($event)" id="file" type="file">
         <label for="file">Image</label>

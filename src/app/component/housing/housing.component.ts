@@ -3,7 +3,6 @@ import {Paginate} from "../../interface/paginate";
 import {Housing} from "../../interface/housing";
 import {HousingService} from "../../service/housing.service";
 import {Session} from "../../interface/session";
-import {PaginationInstance} from "ngx-pagination";
 
 @Component({
   selector: 'app-housing',
@@ -11,6 +10,7 @@ import {PaginationInstance} from "ngx-pagination";
   styleUrls: ['./housing.component.scss']
 })
 export class HousingComponent implements OnInit {
+  @Input()
   housingPaginate: Paginate<Housing>;
   session: Session;
   pageSize: number;
@@ -21,7 +21,9 @@ export class HousingComponent implements OnInit {
   constructor(private housingService: HousingService) {}
 
   ngOnInit(): void {
-    this.getAllHousings();
+    if (!this.housingPaginate) {
+      this.getAllHousings();
+    }
   }
 
   getAllHousings(): void {
@@ -33,15 +35,12 @@ export class HousingComponent implements OnInit {
     });
   }
 
-  getDetailsLink(id: string): string {
-    return `/housing/details/${id}`;
-  }
 
   pageChanged($event: number) {
     if (!$event) {
       $event = 1;
     }
     this.page = $event;
-    this.housingService.getAll(`page=${$event}`).subscribe($data => this.housingPaginate = $data);
+    this.housingService.getAll(`page=${$event}&limit=12`).subscribe($data => this.housingPaginate = $data);
   }
 }
