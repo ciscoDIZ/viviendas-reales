@@ -5,6 +5,8 @@ import {ActivatedRoute} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {PostHousing} from "../../../../interface/post-housing";
 import {UpdatedImage} from "../../../../interface/updated-image";
+import {Address} from "../../../../interface/address";
+import {Housing} from "../../../../interface/housing";
 
 @Component({
   selector: 'app-edit-housing',
@@ -13,7 +15,7 @@ import {UpdatedImage} from "../../../../interface/updated-image";
 })
 export class EditHousingComponent implements OnInit {
   session: Session;
-  housing: PostHousing;
+  housing: Housing;
   isUploadImageDisable: boolean = false;
   multipart: FormData;
   updatedImage: UpdatedImage;
@@ -52,17 +54,10 @@ export class EditHousingComponent implements OnInit {
       price,
       title
     } = housing.value;
-    this.housing.address.state = state ? state : this.housing.address.state;
-    this.housing.address.province = province ? province : this.housing.address.province;
-    this.housing.address.road = road ? road : this.housing.address.road;
-    this.housing.address.name = name ? name : this.housing.address.name;
-    this.housing.address.number = number ? number : this.housing.address.number;
-    this.housing.address.floor = floor ? floor : this.housing.address.floor;
-    this.housing.address.ladder = ladder ? ladder : this.housing.address.ladder;
-    this.housing.description = description ? description : this.housing.description;
-    this.housing.surface = surface ? surface : this.housing.surface;
-    this.housing.price = price ? price : this.housing.price;
-    this.housingService.updateHousing(this.housing).subscribe(housing => {
+    console.log(this.housing.address)
+    const address: Address = {_id: this.housing.address._id,state, province, road, name, number, floor, ladder};
+    const postHousing: PostHousing = {id: this.housing.id,address, price, surface, description, owner: this.housing.owner}
+    this.housingService.updateHousing(postHousing).subscribe(housing => {
 
       if (this.multipart) {
         this.multipart.append('title', title);

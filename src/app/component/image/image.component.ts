@@ -11,6 +11,10 @@ import {Paginate} from "../../interface/paginate";
 })
 export class ImageComponent implements OnInit {
   images: Paginate<Image>;
+  page: number;
+  pageSize: number;
+  total: number;
+  private housing: string;
 
   constructor(private imageService: ImageService, private route: ActivatedRoute) { }
 
@@ -19,12 +23,15 @@ export class ImageComponent implements OnInit {
   }
 
   getImages(): void {
-    const housing = this.route.snapshot.params['housing'];
-    this.imageService.getAll(housing).subscribe(
+    this.housing = this.route.snapshot.params['housing'];
+    this.imageService.getAll(this.housing).subscribe(
       {
         next: (images) => {
           console.log(images)
           this.images = images
+          this.page = this.images.pagination.page;
+          this.pageSize = this.images.pagination.limit;
+          this.total = this.images.pagination.total;
         },
         error: (response) => console.error(response.error.message)
       }
@@ -32,4 +39,11 @@ export class ImageComponent implements OnInit {
 
   }
 
+  pageChanged($event: number) {
+    if (!$event) {
+      $event = 1;
+    }
+    this.page = $event;
+    this.imageService.getAll(this.housing, this.page).subscribe({next: (housings) => this.images = housings})
+  }
 }

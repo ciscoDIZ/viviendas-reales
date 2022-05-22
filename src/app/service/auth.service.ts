@@ -14,7 +14,7 @@ export class AuthService {
   private readonly baseUri: string;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
-    this.baseUri = 'http://localhost:5000/api/auth';
+    this.baseUri = 'http://localhost:8080/api/auth';
   }
 
   singIn(login: Login): Observable<ActivatedUser> {

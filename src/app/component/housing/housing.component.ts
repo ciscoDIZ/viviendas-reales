@@ -41,6 +41,6 @@ export class HousingComponent implements OnInit {
       $event = 1;
     }
     this.page = $event;
-    this.housingService.getAll(`page=${$event}&limit=12`).subscribe($data => this.housingPaginate = $data);
+    this.housingService.getAll(`page=${$event}`).subscribe($data => this.housingPaginate = $data);
   }
 }

@@ -1,0 +1,154 @@
+@import "~bootstrap/scss/functions";
+
+/* spacer */
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+);
+/* border width */
+$border-width:                1px;
+$border-widths: (
+  1: 1px,
+  2: 2px,
+  3: 3px,
+  4: 4px,
+  5: 5px
+);
+/* colors */
+$gray-100: #f8f9fa;
+$gray-600: #868e96;
+$gray-800: #343a40;
+$gray-900: #343a40;
+$black: #000;
+$white: #FFFFFF;
+$red: #dc3545;
+$yellow: #ffc107;
+$green: #006600; // This is the only variable I wanted to change
+$cyan: #17a2b8;
+
+$primary:       #304269;
+$secondary:     #91BED4;
+$success:       $green;
+$info:          #D9E8F5;
+$warning:       $yellow;
+$danger:        #F26101;
+$light:         #f2f2f2;
+$dark:          $gray-900;
+
+
+$theme-colors: (
+  primary: $primary,
+  secondary: $secondary,
+  success: $success,
+  info: $info,
+  warning: $yellow,
+  danger: $danger,
+  light: $gray-100,
+  dark: $gray-800
+);
+/* carrousel */
+
+$carousel-control-color:             $gray-100;
+$carousel-control-width:             15%;
+$carousel-control-opacity:           .5;
+$carousel-control-hover-opacity:     .9;
+$carousel-control-transition:        opacity .15s ease;
+
+$carousel-indicator-width:           30px;
+$carousel-indicator-height:          3px;
+$carousel-indicator-hit-area-height: 10px;
+$carousel-indicator-spacer:          3px;
+$carousel-indicator-opacity:         .5;
+$carousel-indicator-active-bg:       $gray-100;
+$carousel-indicator-active-opacity:  1;
+$carousel-indicator-transition:      opacity .6s ease;
+
+$carousel-caption-width:             70%;
+$carousel-caption-color:             $gray-100;
+$carousel-caption-padding-y:         1.25rem;
+$carousel-caption-spacer:            1.25rem;
+
+$carousel-control-icon-width:        2rem;
+
+$carousel-control-prev-icon-bg:      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$carousel-control-color}'><path d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/></svg>");
+$carousel-control-next-icon-bg:      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$carousel-control-color}'><path d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg>");
+
+$carousel-transition-duration:       .6s;
+$carousel-transition:                transform $carousel-transition-duration ease-in-out; // Define transform transition first if using multiple transitions (e.g., `transform 2s ease, opacity .5s ease-out`)
+
+$carousel-dark-indicator-active-bg:  $gray-800;
+$carousel-dark-caption-color:        $gray-800;
+$carousel-dark-control-icon-filter:  invert(1) grayscale(100);
+
+/* card */
+$grid-gutter-width:           1.5rem;
+
+$border-radius:               .25rem;
+$border-radius-sm:            .2rem;
+$border-radius-lg:            .3rem;
+$border-radius-pill:          50rem;
+
+
+$card-spacer-y:                     $spacer;
+$card-spacer-x:                     $spacer;
+$card-title-spacer-y:               $spacer * .5;
+$card-border-width:                 $border-width;
+$card-border-radius:                $border-radius;
+$card-border-color:                 rgba($black, .125);
+$card-inner-border-radius:          subtract($card-border-radius, $card-border-width);
+$card-cap-padding-y:                $card-spacer-y * .5;
+$card-cap-padding-x:                $card-spacer-x;
+$card-cap-bg:                       rgba($black, .03);
+$card-cap-color:                    null;
+$card-height:                       null;
+$card-color:                        null;
+$card-bg:                           $gray-100;
+$card-img-overlay-padding:          $spacer;
+$card-group-margin:                 $grid-gutter-width * .5;
+
+/* accordion */
+
+$body-color: $gray-900;
+$btn-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out,
+                 box-shadow .15s ease-in-out;
+$body-bg:                                 $white;
+
+
+$component-active-bg:                     $primary;
+$input-focus-border-color:                tint-color($component-active-bg, 50%);
+$accordion-padding-y:                     1rem;
+$accordion-padding-x:                     1.25rem;
+$accordion-color:                         $body-color;
+$accordion-bg:                            $body-bg;
+$accordion-border-width:                  $border-width;
+$accordion-border-color:                  rgba($black, .125);
+$accordion-border-radius:                 $border-radius;
+$accordion-inner-border-radius:           subtract($accordion-border-radius, $accordion-border-width);
+
+$accordion-body-padding-y:                $accordion-padding-y;
+$accordion-body-padding-x:                $accordion-padding-x;
+
+$accordion-button-padding-y:              $accordion-padding-y;
+$accordion-button-padding-x:              $accordion-padding-x;
+$accordion-button-color:                  $accordion-color;
+$accordion-button-bg:                     $accordion-bg;
+$accordion-transition:                    $btn-transition, border-radius .15s ease;
+$accordion-button-active-bg:              tint-color($component-active-bg, 90%);
+$accordion-button-active-color:           shade-color($primary, 10%);
+
+$accordion-button-focus-border-color:     $input-focus-border-color;
+/*$accordion-button-focus-box-shadow:       $btn-focus-box-shadow;*/
+
+$accordion-icon-width:                    1.25rem;
+$accordion-icon-color:                    $accordion-color;
+$accordion-icon-active-color:             $accordion-button-active-color;
+$accordion-icon-transition:               transform .2s ease-in-out;
+$accordion-icon-transform:                rotate(-180deg);
+
+$accordion-button-icon:         url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");
+$accordion-button-active-icon:  url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$accordion-icon-active-color}'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>");

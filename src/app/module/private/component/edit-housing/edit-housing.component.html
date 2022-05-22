@@ -1,80 +1,119 @@
-<form class="mt-3" *ngIf="housing" #housingForm="ngForm" (ngSubmit)="onSubmit(housingForm)" novalidate>
-  <div class="container">
-    <fieldset>
-      <legend>Address</legend>
-      <div class="row">
-        <div class="form-floating col-xl-6">
-          <input class="form-control" name="state" [(ngModel)]="housing.address.state" id="state" type="text">
-          <label for="state">State</label>
-        </div>
-        <div class="form-floating col-xl-6">
-          <input class="form-control" name="province" [(ngModel)]="housing.address.province" id="province" type="text">
-          <label for="province">Province</label>
-        </div>
-        <div class="form-floating col-xl-1">
-          <select class="form-control" name="road" [(ngModel)]="housing.address.road" id="road" type="text">
-            <option value="street">Street</option>
-            <option value="avenue">Avenue</option>
-            <option value="road">Road</option>
-            <option value="square">Square</option>
-          </select>
-          <label for="road">Road type</label>
-        </div>
-        <div class="w-100"></div>
-        <div class="form-floating">
-          <input class="form-control" name="name" [(ngModel)]="housing.address.name" id="name" type="text">
-          <label for="name">Road name</label>
-        </div>
-        <div class="form-floating col-xl-4">
-          <input class="form-control" name="number" [(ngModel)]="housing.address.number" id="number" type="text">
-          <label for="number">Number</label>
-        </div>
-        <div class="form-floating col-xl-4">
-          <input class="form-control" name="floor" [(ngModel)]="housing.address.floor" id="floor" type="text">
-          <label for="floor">Floor</label>
-        </div>
-        <div class="form-floating col-xl-4">
-          <input class="form-control" name="ladder" [(ngModel)]="housing.address.ladder" id="ladder" type="text">
-          <label for="ladder">Ladder</label>
+<div *ngIf="housing" class="container">
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <div class="container">
+        <div class="row">
+          <div class="card mb-3">
+            <img class="card-img-top" src="{{housing.mainImage.apiUri}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{housing.address.road}} {{housing.address.name}}, {{housing.address.number}}</h5>
+              <p class="card-text">{{housing.description}}</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+            <div class="card-footer">
+              <div><span i18n="Comunidad autónoma">state: </span>{{housing.address.state}}</div>
+              <div><span>province: </span>{{housing.address.province}}</div>
+              <div><span>floor: </span>{{housing.address.floor}}</div>
+              <div><span>ladder: </span>{{housing.address.ladder}}</div>
+            </div>
+          </div>
+          <!--<div class="col">
+            <h3>Image</h3>
+            <img class="img-fluid" src="{{housing.mainImage.apiUri}}" alt="">
+          </div>
+          <div class="col">
+            <h3>Address</h3>
+            <div class="row">
+
+              <div class="col-12"><span>road type: </span>{{housing.address.road}}</div>
+              <div class="col-12"><span>road name: </span>{{housing.address.name}}</div>
+              <div class="col-12"><span>number: </span>{{housing.address.number}}</div>
+
+            </div>
+          </div>-->
         </div>
       </div>
-    </fieldset>
-    <fieldset>
-      <legend>Housing</legend>
-      <div class="row">
-        <div class="form-floating col-12">
-          <textarea name="description" [(ngModel)]="housing.description" id="description" class="form-control" cols="30" rows="10"></textarea>
-          <label for="description">Description</label>
-        </div>
-        <div class="form-floating col">
-          <input class="form-control" name="surface" [(ngModel)]="housing.surface" id="surface" type="number">
-          <label for="surface">Surface</label>
-        </div>
-        <div class="form-floating col">
-          <input class="form-control" id="price" name="price" [(ngModel)]="housing.price" type="number">
-          <label for="price">Price</label>
-        </div>
-      </div>
-
-
-    </fieldset>
-    <div class="form-check form-switch">
-      <input class="form-check-input" (click)="toggleUploadImage()" type="checkbox" id="flexSwitchCheckDefault">
-      <label class="form-check-label"  for="flexSwitchCheckDefault">Do you want to upload a principal image?</label>
     </div>
-    <fieldset [disabled]="!isUploadImageDisable">
-      <legend>Upload image</legend>
-      <div class="col">
-        <input class="form-control" [required]="isUploadImageDisable" ngModel name="file" (change)="upload($event)" id="file" type="file">
-        <label for="file">Image</label>
-      </div>
-      <div class="form-floating col">
-        <input class="form-control" [required]="isUploadImageDisable" ngModel name="title"  id="title" type="text">
-        <label for="title">Price</label>
-      </div>
-    </fieldset>
+    <div class="col-12 col-lg-6">
+      <form class="mt-3" *ngIf="housing" #housingForm="ngForm" (ngSubmit)="onSubmit(housingForm)" novalidate>
+        <div class="container">
+          <fieldset>
+            <legend>Address</legend>
+            <div class="row">
+              <div class="form-floating col-12">
+                <input class="form-control" name="state" [(ngModel)]="housing.address.state" id="state" type="text">
+                <label for="state">State</label>
+              </div>
+              <div class="form-floating col-12">
+                <input class="form-control" name="province" [(ngModel)]="housing.address.province" id="province" type="text">
+                <label for="province">Province</label>
+              </div>
+              <div class="form-floating col-4">
+                <select class="form-control" name="road" [(ngModel)]="housing.address.road" id="road" type="text">
+                  <option value="street">Street</option>
+                  <option value="avenue">Avenue</option>
+                  <option value="road">Road</option>
+                  <option value="square">Square</option>
+                </select>
+                <label for="road">Road type</label>
+              </div>
+              <div class="form-floating col-8">
+                <input class="form-control" name="name" [(ngModel)]="housing.address.name" id="name" type="text">
+                <label for="name">Road name</label>
+              </div>
+              <div class="form-floating col-12">
+                <input class="form-control" name="number" [(ngModel)]="housing.address.number" id="number" type="text">
+                <label for="number">Number</label>
+              </div>
+              <div class="form-floating col-12">
+                <input class="form-control" name="floor" [(ngModel)]="housing.address.floor" id="floor" type="text">
+                <label for="floor">Floor</label>
+              </div>
+              <div class="form-floating col-12">
+                <input class="form-control" name="ladder" [(ngModel)]="housing.address.ladder" id="ladder" type="text">
+                <label for="ladder">Ladder</label>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Housing</legend>
+            <div class="row">
+              <div class="form-floating col-12">
+                <textarea name="description" [(ngModel)]="housing.description" id="description" class="form-control"></textarea>
+                <label for="description">Description</label>
+              </div>
+              <div class="form-floating col-12">
+                <input class="form-control" name="surface" [(ngModel)]="housing.surface" id="surface" type="number">
+                <label for="surface">Surface</label>
+              </div>
+              <div class="form-floating col-12">
+                <input class="form-control" id="price" name="price" [(ngModel)]="housing.price" type="number">
+                <label for="price">Price</label>
+              </div>
+            </div>
 
-    <button class="btn btn-primary">Submit</button>
+
+          </fieldset>
+          <div class="form-check form-switch">
+            <input class="form-check-input" (click)="toggleUploadImage()" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label"  for="flexSwitchCheckDefault">Do you want to upload a principal image?</label>
+          </div>
+          <fieldset [disabled]="!isUploadImageDisable">
+            <legend>Upload image</legend>
+            <div class="col">
+              <input class="form-control" [required]="isUploadImageDisable" ngModel name="file" (change)="upload($event)" id="file" type="file">
+              <label for="file">Image</label>
+            </div>
+            <div class="form-floating col">
+              <input class="form-control" [required]="isUploadImageDisable" ngModel name="title"  id="title" type="text">
+              <label for="title">Price</label>
+            </div>
+          </fieldset>
+
+          <button class="btn btn-primary">Submit</button>
+        </div>
+
+      </form>
+    </div>
   </div>
-
-</form>
+</div>

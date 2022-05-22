@@ -8,7 +8,7 @@ import {DashboardComponent} from "./component/dashboard/dashboard.component";
 import {CommentComponent} from "./component/comment/comment.component";
 import {ProfileComponent} from "./component/profile/profile.component";
 import {Error404Component} from "./component/error404/error404.component";
-import {HousingByOwnerComponent} from "./housing-by-owner/housing-by-owner.component";
+import {HousingByOwnerComponent} from "./component/housing-by-owner/housing-by-owner.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

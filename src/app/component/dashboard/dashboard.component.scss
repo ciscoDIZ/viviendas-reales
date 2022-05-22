@@ -1,12 +1,18 @@
 .wrapper {
   img {
+    margin: auto;
     width: 100rem;
-    height: 60rem;
+    height: 30rem;
   }
 }
 .card {
   img {
-    width: 15rem;
-    height: 20rem;
+    width: 15em;
+    height: 20em;
   }
+}
+div.card {
+
+    width: 100%;
+
 }

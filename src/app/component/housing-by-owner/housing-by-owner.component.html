@@ -1,29 +1,28 @@
-<div *ngIf="housingPaginate" class="container">
+<div *ngIf="housings" class="container">
 
-  <div class="row row-cols-lg-5 ">
+  <div class="row row-cols-5">
 
-      <div class="card col-12 col-lg m-1" *ngFor="let housing of housingPaginate.list |
+    <div class="card" style="width: 18rem;" *ngFor="let housing of housings.list |
     paginate: {
       id: 'DEFAULT_PAGINATION_ID',
       currentPage: page,
       itemsPerPage: pageSize,
       totalItems: total
     }">
-        <img src="{{housing.mainImage.apiUri}}" class="card-img-top img-fluid" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{housing.address.name}}, {{housing.address.number}}</h5>
-          <p class="card-text">{{ housing.description | readMore: 100 }}</p>
-          <a routerLink="/housing/details/{{housing.id}}"  class="btn btn-primary">Details</a>
-        </div>
+      <img src="{{housing.mainImage.apiUri}}" class="card-img-top img-fluid w-100 col" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{housing.address.name}}, {{housing.address.number}}</h5>
+        <p class="card-text">{{ housing.description | readMore: 100 }}</p>
+        <a routerLink="/housing/details/{{housing.id}}"  class="btn btn-primary">Details</a>
       </div>
+    </div>
 
   </div>
   <div class="row">
     <div class="col-12">
       <pagination-controls
-        *ngIf="pagination"
         (pageChange)="pageChanged($event)"
-        [maxSize]="housingPaginate.pagination.limit"
+        [maxSize]="housings.pagination.limit"
         (pageBoundsCorrection)="pageChanged($event)"
         [autoHide]="false"
         [responsive]="true"

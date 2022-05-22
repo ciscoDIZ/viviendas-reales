@@ -1,10 +1,30 @@
 <div *ngIf="images" class="container">
-  <div *ngFor="let image of images.list" class="row">
-    <div class="col-4">
+  <div class="row">
+    <div *ngFor="let image of images.list | paginate: {
+      id: 'DEFAULT_PAGINATION_ID',
+      currentPage: page,
+      itemsPerPage: pageSize,
+      totalItems: total
+    }"  class="col-4">
       <h5>{{image.title}}</h5>
-      <img src="{{image.apiUri}}" alt="">
-      <p>{{image.createdAt}}</p>
-      <button routerLink="/image/details/{{image.id}}">details</button>
+      <img class="img-fluid" src="{{image.apiUri}}" alt="">
+      <p>{{ image.createdAt | date }}</p>
+      <button class="btn btn-primary" routerLink="/image/details/{{image.id}}">details</button>
     </div>
+  </div>
+  <div class="row">
+    <pagination-controls
+      (pageChange)="pageChanged($event)"
+      [maxSize]="images.pagination.limit"
+      (pageBoundsCorrection)="pageChanged($event)"
+      [autoHide]="false"
+      [responsive]="true"
+      [directionLinks]="true"
+      previousLabel="prev"
+      nextLabel="next"
+      screenReaderPaginationLabel="pagination"
+      screenReaderPageLabel="page"
+      screenReaderCurrentLabel="You're on page"
+    ></pagination-controls>
   </div>
 </div>

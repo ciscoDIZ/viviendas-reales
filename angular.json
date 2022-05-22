@@ -3,6 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+
     "viviendas-reales-v2": {
       "projectType": "application",
       "schematics": {
@@ -28,7 +29,12 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "*.svg",
+                "input": "./node_modules/bootstrap-icons/",
+                "output": "/"
+              }
             ],
             "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
@@ -77,6 +83,12 @@
           "configurations": {
             "production": {
               "browserTarget": "viviendas-reales-v2:build:production"
+            },
+            "es": {
+              "browserTarget": "angular-i18n:build:es"
+            },
+            "en": {
+              "browserTarget": "angular-i18n:build:en"
             },
             "development": {
               "browserTarget": "viviendas-reales-v2:build:development"

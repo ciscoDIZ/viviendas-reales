@@ -22,7 +22,8 @@ import {FormsModule} from "@angular/forms";
 import { ProfileComponent } from './component/profile/profile.component';
 import { Error404Component } from './component/error404/error404.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import { HousingByOwnerComponent } from './housing-by-owner/housing-by-owner.component';
+import { HousingByOwnerComponent } from './component/housing-by-owner/housing-by-owner.component';
+import { UploadHousingImageComponent } from './component/upload-housing-image/upload-housing-image.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { HousingByOwnerComponent } from './housing-by-owner/housing-by-owner.com
     ProfileComponent,
     Error404Component,
     HousingByOwnerComponent,
+    UploadHousingImageComponent,
   ],
   imports: [
     BrowserModule,

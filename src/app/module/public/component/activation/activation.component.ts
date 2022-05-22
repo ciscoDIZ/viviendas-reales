@@ -1,9 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedUser} from "../../../../interface/activated-user";
-import {Session} from "../../../../interface/session";
 import {AuthService} from "../../../../service/auth.service";
 import {Router} from "@angular/router";
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 
@@ -16,12 +14,10 @@ export class ActivationComponent implements OnInit {
   @Input()
   activationUri: string;
   activatedUser: ActivatedUser;
-  loggedUser: Session;
 
   constructor(
     private authService: AuthService,
-    private router: Router,
-    private jwtHelperService: JwtHelperService
+    private router: Router
   ) {
     this.activatedUser = {
       token: ''
@@ -29,12 +25,16 @@ export class ActivationComponent implements OnInit {
   }
 
   activation(): void {
-    this.authService.activate(this.activationUri).subscribe($data => this.activatedUser = $data);
-    this.loggedUser = this.jwtHelperService.decodeToken<Session>(this.activatedUser.token);
-    sessionStorage.setItem('session', JSON.stringify(this.loggedUser));
-    this.router
-      .navigate(['/dashboard'])
-      .then(() => window.location.reload());
+    console.log(this.activationUri)
+    this.authService.activate(this.activationUri).subscribe($data => {
+      this.activatedUser = $data
+      console.log(this.activatedUser)
+      sessionStorage.setItem('session', JSON.stringify({token: this.activatedUser.token}))
+      this.router
+        .navigate(['/dashboard'])
+        .then(() => window.location.reload());
+    });
+
   }
 
   ngOnInit(): void {

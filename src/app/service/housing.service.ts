@@ -16,7 +16,7 @@ export class HousingService {
 
   apiBase: string;
   constructor(private http: HttpClient, private authService: AuthService) {
-      this.apiBase = 'http://localhost:5000/api/housing'
+      this.apiBase = 'http://localhost:8080/api/housing'
   }
 
   getAll(query: string = ''): Observable<Paginate<Housing>> {

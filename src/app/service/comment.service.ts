@@ -11,7 +11,7 @@ import {PostComment} from "../interface/post-comment";
 })
 export class CommentService {
 
-  apiBase: string = 'http://localhost:5000/api/comment'
+  apiBase: string = 'http://localhost:8080/api/comment'
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getAll(query: any): Observable<Paginate<Comment>> {

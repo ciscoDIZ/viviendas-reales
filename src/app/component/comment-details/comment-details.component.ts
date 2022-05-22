@@ -42,4 +42,9 @@ export class CommentDetailsComponent implements OnInit {
       error: (response) => console.error(response.error.message)
     });
   }
+
+  isSessionLike(id: string) {
+    return !!this.comment.likes.find(user => user == id);
+
+  }
 }

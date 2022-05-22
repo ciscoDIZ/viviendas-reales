@@ -61,4 +61,9 @@ export class HousingDetailsComponent implements OnInit {
       error: response => console.error(response.error.message)
     })
   }
+
+  isSessionLike(id: string) {
+    return !!this.housing.likes.find(user => user == id);
+
+  }
 }
