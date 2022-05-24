@@ -24,6 +24,8 @@ import { Error404Component } from './component/error404/error404.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { HousingByOwnerComponent } from './component/housing-by-owner/housing-by-owner.component';
 import { UploadHousingImageComponent } from './component/upload-housing-image/upload-housing-image.component';
+import {AngularFireModule} from "@angular/fire/compat";
+import { environment } from "../environments/environment.prod";
 
 
 @NgModule({
@@ -52,7 +54,8 @@ import { UploadHousingImageComponent } from './component/upload-housing-image/up
     SharedUtilsModule,
     NgxPaginationModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [
     {

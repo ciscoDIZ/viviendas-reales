@@ -9,7 +9,7 @@ import {AuthService} from "./auth.service";
   providedIn: 'root'
 })
 export class ImageService {
-  apiBase: string = 'http://localhost:8080/api/image'
+  apiBase: string = 'https://auth-api-express-nodejs.herokuapp.com/api/image'
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getImageById(id: string): Observable<Image> {

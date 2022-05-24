@@ -14,7 +14,7 @@ export class AuthService {
   private readonly baseUri: string;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
-    this.baseUri = 'http://localhost:8080/api/auth';
+    this.baseUri = 'https://auth-api-express-nodejs.herokuapp.com/api/auth';
   }
 
   singIn(login: Login): Observable<ActivatedUser> {

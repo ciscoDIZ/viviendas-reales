@@ -78,8 +78,6 @@ export class HeaderComponent implements OnInit{
   endSession() {
     this.loginService.logOut();
     this.session = null;
-    window.location.reload();
-
   }
 
   openModal(modal) {
@@ -101,11 +99,11 @@ export class HeaderComponent implements OnInit{
                 this.getUser();
                 this.errorMessage = '';
                 modal.close()
-                window.location.reload()
               }
             })
           },
-          error: (err) => this.errorMessage = err.error.message
+          error: (err) => this.errorMessage = err.error.message,
+          complete: () => this.router.navigate(['/dashboard'])
         }
       );
   }
