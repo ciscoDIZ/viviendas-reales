@@ -43,8 +43,12 @@ export class CommentDetailsComponent implements OnInit {
     });
   }
 
-  isSessionLike(id: string) {
-    return !!this.comment.likes.find(user => user == id);
+  isSessionLike(session: Session) {
+    console.log(session)
+    if (session) {
+      return !!this.comment.likes.map(userID => userID.toString()).find(user => user == session.id);
+    }
+    return false;
 
   }
 }

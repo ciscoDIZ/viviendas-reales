@@ -7,13 +7,14 @@ import {CreatedUser} from "../interface/created-user";
 import {User} from "../interface/user";
 import {AuthService} from "./auth.service";
 import {Paginate} from "../interface/paginate";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  apiBase: string = 'https://auth-api-express-nodejs.herokuapp.com/api/user'
+  private readonly apiBase: string=`${environment.apiUri}/user`
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   create(user: PostUser): Observable<CreatedUser> {

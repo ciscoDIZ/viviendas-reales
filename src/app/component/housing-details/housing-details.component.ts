@@ -16,6 +16,7 @@ export class HousingDetailsComponent implements OnInit {
   housing: Housing
   showMore: boolean = false;
   constructor(private activatedRoute: ActivatedRoute, private housingService: HousingService, private authService: AuthService) {
+    this.authService.getSession().subscribe({next: session => this.session = session})
   }
 
   ngOnInit(): void {
@@ -37,8 +38,8 @@ export class HousingDetailsComponent implements OnInit {
     this.showMore = !this.showMore;
   }
 
-  onLike(id: string): void {
-    if (this.housing.likes.map(m => m.toString()).find(f => f === id)) {
+  onLike(session: Session): void {
+    if (this.housing.likes.map(m => m.toString()).find(f => f === session.id)) {
       this.removeLike();
       return;
     }
@@ -62,8 +63,10 @@ export class HousingDetailsComponent implements OnInit {
     })
   }
 
-  isSessionLike(id: string) {
-    return !!this.housing.likes.find(user => user == id);
-
+  isSessionLike(session: Session) {
+    if (session){
+      return !!this.housing.likes.find(user => user == session.id);
+    }
+    return false;
   }
 }

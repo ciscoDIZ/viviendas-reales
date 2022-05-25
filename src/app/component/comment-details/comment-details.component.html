@@ -18,7 +18,7 @@
 
   <div class="small d-flex justify-content-start">
     <button [disabled]="!session" (click)="onLike(session.id)" class="btn btn-primary d-flex align-items-center me-3">
-      <i [ngClass]="isSessionLike(session.id) ? 'bi bi-heart me-2' : 'bi bi-heart-fill me-2'"></i>
+      <i [ngClass]="session && isSessionLike(session) ? 'bi bi-heart-fill me-2' : 'bi bi-heart me-2'"></i>
       <p class="mb-0">Like</p>
     </button><span>{{comment.likes.length}}</span>
     <a href="#!" class="d-flex align-items-center me-3">

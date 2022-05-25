@@ -6,23 +6,23 @@ import {Session} from "../interface/session";
 import {ActivatedUser} from "../interface/activated-user";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {ResponseMsg} from "../interface/response-msg";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly baseUri: string;
+  private readonly baseUri: string=`${environment.apiUri}/auth`;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
-    this.baseUri = 'https://auth-api-express-nodejs.herokuapp.com/api/auth';
   }
 
   singIn(login: Login): Observable<ActivatedUser> {
       return this.http.patch<ActivatedUser>(`${this.baseUri}`, login);
   }
 
-  activate(uri: string): Observable<ActivatedUser> {
-    return this.http.patch<ActivatedUser>(uri, {});
+  activate(id: string): Observable<ActivatedUser> {
+    return this.http.patch<ActivatedUser>(`${this.baseUri}/${id}`, {});
   }
 
   logOut(): void {

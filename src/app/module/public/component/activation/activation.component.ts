@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedUser} from "../../../../interface/activated-user";
 import {AuthService} from "../../../../service/auth.service";
 import {Router} from "@angular/router";
+import {GetUser} from "../../../../interface/get-user";
 
 
 
@@ -11,10 +12,10 @@ import {Router} from "@angular/router";
   styleUrls: ['./activation.component.scss']
 })
 export class ActivationComponent implements OnInit {
-  @Input()
-  activationUri: string;
-  activatedUser: ActivatedUser;
 
+  activatedUser: ActivatedUser;
+  @Input()
+  user: string;
   constructor(
     private authService: AuthService,
     private router: Router
@@ -25,10 +26,9 @@ export class ActivationComponent implements OnInit {
   }
 
   activation(): void {
-    console.log(this.activationUri)
-    this.authService.activate(this.activationUri).subscribe($data => {
+
+    this.authService.activate(this.user).subscribe($data => {
       this.activatedUser = $data
-      console.log(this.activatedUser)
       sessionStorage.setItem('session', JSON.stringify({token: this.activatedUser.token}))
       this.router
         .navigate(['/dashboard'])
@@ -36,7 +36,6 @@ export class ActivationComponent implements OnInit {
     });
 
   }
-
   ngOnInit(): void {
   }
 

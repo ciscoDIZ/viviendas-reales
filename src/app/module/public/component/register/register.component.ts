@@ -34,6 +34,7 @@ export class RegisterComponent implements OnInit {
     }
     const user: PostUser = {name,surname,email,password, residence};
     this.userService.create(user).subscribe($data => {
+      console.log($data)
       this.getUser = $data
     });
   }

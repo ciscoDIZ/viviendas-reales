@@ -13,10 +13,11 @@
         <div><span>province: </span>{{housing.address.province}}</div>
         <div><span>floor: </span>{{housing.address.floor}}</div>
         <div><span>ladder: </span>{{housing.address.ladder}}</div>
+        <a class="card-link" routerLink="/user/profile/{{housing.owner}}">Owner</a>
       </div>
       <div class="card-footer d-flex ">
-        <button [disabled]="!session" (click)="onLike(session.id)" class="btn btn-primary d-flex align-items-center me-3">
-          <i [ngClass]="isSessionLike(session.id) ? 'bi bi-heart-fill me-2': 'bi bi-heart me-2'"></i>
+        <button [disabled]="!session" (click)="onLike(session)" class="btn btn-primary d-flex align-items-center me-3">
+          <i [ngClass]="session && isSessionLike(session) ? 'bi bi-heart-fill me-2': 'bi bi-heart me-2'"></i>
           <p class="mb-0 me-2">Like</p>
 
         </button>
