@@ -78,6 +78,7 @@ export class HeaderComponent implements OnInit{
   endSession() {
     this.loginService.logOut();
     this.session = null;
+    location.reload();
   }
 
   openModal(modal) {
